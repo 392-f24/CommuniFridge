@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 import GoogleMapComponent from '../components/GoogleMapComponent';
+import { useDbData } from '../utilities/firebase';
 
 const HomePage = () => {
     const [marker, setMarker] = useState('');
@@ -17,7 +18,13 @@ const HomePage = () => {
         3: { address: "1601 Payne St, Evanston" },
         4: { address: "1335 Dodge Ave, Evanston" }
     };
+    /*
+    const [listings, error] = useDbData('/listings');
 
+    if (error) return <h1>Error loading data: {error.toString()}</h1>;
+    if (listings === undefined) return <h1>Loading data...</h1>;
+    if (!listings) return <h1>No listings found</h1>;
+    */
     return (
         <div className="overflow-y-hidden">
             {isLoaded ? (
