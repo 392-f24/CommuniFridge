@@ -1,10 +1,14 @@
-import { useState } from 'react'; 
+import { useState, useRef } from 'react'; 
 import InputField from './InputField';
 import { useDbUpdate } from '../utilities/firebase';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const RequestForm = ({ id }) => {
 
-    const [update, result] = useDbUpdate(`/${id}`);
+    const uuid = useRef(uuidv4());
+
+    const [update, result] = useDbUpdate(`/${id}/${uuid}`);
 
     const [data, setData] = useState({
         item: "",
@@ -19,15 +23,14 @@ const RequestForm = ({ id }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
-        
-
-
+        update(data); 
     }
 
     return (
         <div className="mt-2">
 
-            <form className="flex flex-col mx-auto items-center w-3/4">
+            <form className="flex flex-col mx-auto items-center w-3/4"
+                  onSubmit={(e) => {handleSubmit(e)}}>
 
                <InputField name="item" data={data.item} handleChange={handleChange}/>
 
@@ -40,10 +43,7 @@ const RequestForm = ({ id }) => {
                     Submit 
                 </button>
                
-
             </form>
-
-
         </div>
     );
 }
