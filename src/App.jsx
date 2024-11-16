@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import Dispatcher from './components/Dispatcher';
 
 function App() {
 
-  return (<p>Test</p>);
+  return (<Dispatcher/>);
 }
 
 export default App;
