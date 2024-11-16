@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./Homepage";
 
 
 const Dispatcher = () => {
@@ -7,7 +8,7 @@ const Dispatcher = () => {
     <BrowserRouter>
         <Routes>
 
-            <Route path="/" element={<p className="font-bold"> HOMEPAGE</p>}/>
+            <Route path="/" element={<HomePage/>}/>
 
         </Routes>
     </BrowserRouter>);
