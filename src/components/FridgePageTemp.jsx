@@ -29,8 +29,12 @@ const FridgePageTemp = () => {
                     className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
                 >
                     Back to Map
-                </button>        
+                </button>
+                <button onClick={() => setIsOpen(true)} className="border-1 border-purple-500 bg-purple-300 p-2 rounded-md w-24 self-end">
+                    Add Item
+                </button>
             </div>
+            {isOpen && <AddModal isOpen={isOpen} setIsOpen={setIsOpen} fridge="1" />}
         </div>
     );
     
