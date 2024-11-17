@@ -1,4 +1,3 @@
-// components/HomePage.jsx
 import { useState } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { useDbData } from '../utilities/firebase';
@@ -24,7 +23,6 @@ const HomePage = () => {
         navigate(`/fridge/${id}`);
     }
     
-
     return (
         <div className="overflow-y-hidden">
             {isLoaded ? (
@@ -40,10 +38,11 @@ const HomePage = () => {
             <div className="mt-4 flex flex-col space-y-4 items-center">
                 {Object.entries(fridges).map(([id, fridge]) => (
                     <button
+                        key={id}
                         onClick={() => goToFridge(id)}
                         className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
                     >
-                        View {fridge.name}: {fridge.address}
+                        View {fridge.displayName} Fridge
                     </button>
                 ))}
             </div>

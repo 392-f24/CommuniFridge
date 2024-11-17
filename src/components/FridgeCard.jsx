@@ -13,12 +13,15 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
         <div className="w-full bg-gray-100 p-4 border border-gray-300 rounded-md">
             <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">
+                    {/* expand drawer button */}
                     <button
                         onClick={toggleDrawer}
                         className="w-6 h-6 bg-blue-500 text-white rounded-full flex justify-center items-center hover:bg-blue-600"
                     >
                         ▼
                     </button>
+
+                    {/* item name */}
                     <h1 className="text-lg font-semibold text-gray-800">{item.name}</h1>
                 </div>
                 <div className="flex items-center space-x-2">
