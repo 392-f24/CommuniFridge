@@ -1,4 +1,5 @@
 import { useDbData } from "../utilities/firebase";
+import FridgeCard from "./FridgeCard";
 
 const FridgePageTemp = () => {
 
@@ -8,10 +9,7 @@ const FridgePageTemp = () => {
     if (items === undefined) return <h1>Loading data...</h1>;
     if (!items) return <h1>No items found</h1>;
 
-    console.log(items);
-
-    return <h1>html</h1>;
-
+    return Object.entries(items).map(([id, item]) => <FridgeCard key={id} item={item}/>);
 };
 
 export default FridgePageTemp;
