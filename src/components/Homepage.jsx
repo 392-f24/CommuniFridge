@@ -29,6 +29,7 @@ const HomePage = () => {
                 <div>Loading Google Maps...</div>
             )}
         </div>
+        
     );
 }
 

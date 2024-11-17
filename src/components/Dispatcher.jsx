@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./Homepage";
+import FridgePageTemp from "./FridgePageTemp";
 
 
 const Dispatcher = () => {
@@ -8,7 +9,9 @@ const Dispatcher = () => {
     <BrowserRouter>
         <Routes>
 
-            <Route path="/" element={<HomePage/>}/>
+            <Route path="/" element={<HomePage />}/>
+
+            <Route path="/fridge" element={<FridgePageTemp />}/>
 
         </Routes>
     </BrowserRouter>);
