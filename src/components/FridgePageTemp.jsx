@@ -1,7 +1,9 @@
 import { useDbData } from "../utilities/firebase";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
 import FridgeCard from "./FridgeCard";
+import AddModal from "./AddModal";
 
 const FridgePageTemp = () => {
     const { fridgeId } = useParams();
@@ -27,11 +29,11 @@ const FridgePageTemp = () => {
             <div className="mt-4 flex flex-col space-y-4 items-center">
                 <button
                     onClick={() => goToHome()}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition border-2 border-blue-700"
                 >
                     Back to Map
                 </button>
-                <button onClick={() => setIsOpen(true)} className="border-1 border-purple-500 bg-purple-300 p-2 rounded-md w-24 self-end">
+                <button onClick={() => setIsOpen(true)} className="border-2 border-purple-400 bg-purple-300 p-2 rounded-md w-24 text-white">
                     Add Item
                 </button>
             </div>
