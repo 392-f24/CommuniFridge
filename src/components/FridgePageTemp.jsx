@@ -9,7 +9,13 @@ const FridgePageTemp = () => {
     if (items === undefined) return <h1>Loading data...</h1>;
     if (!items) return <h1>No items found</h1>;
 
-    return Object.entries(items).map(([id, item]) => <FridgeCard key={id} item={item}/>);
+    return (
+        <div>
+            <h1>Fridge Items</h1>
+            {Object.entries(items).map(([id, item]) => <FridgeCard key={id} id={id} item={item}/>)}
+        </div>
+    );
+    
 };
 
 export default FridgePageTemp;

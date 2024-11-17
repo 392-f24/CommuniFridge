@@ -1,10 +1,58 @@
-const FridgeCard = ({item}) => {
+import { useState } from "react";
+import { useDbUpdate } from "../utilities/firebase";
+
+const FridgeCard = ({ id, item }) => {
+    const [update, result] = useDbUpdate(`/items/${id}`);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+    const toggleDrawer = () => {
+        setIsDrawerOpen(!isDrawerOpen);
+    };
+
     return (
-        <div>
-            <h1>{item.name}</h1>
-            <p>{item.quantity}</p>
+        <div className="w-full bg-gray-100 p-4 border border-gray-300 rounded-md">
+            <div className="flex justify-between items-center">
+                <div className="flex items-center space-x-2">
+                    <button
+                        onClick={toggleDrawer}
+                        className="w-6 h-6 bg-blue-500 text-white rounded-full flex justify-center items-center hover:bg-blue-600"
+                    >
+                        ▼
+                    </button>
+                    <h1 className="text-lg font-semibold text-gray-800">{item.name}</h1>
+                </div>
+                <div className="flex items-center space-x-2">
+                    {/* minus button */}
+                    <button 
+                        className="w-8 h-8 bg-red-500 text-white rounded-md flex justify-center items-center hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                        disabled={item.quantity === 0}
+                        onClick={() => update({quantity : item.quantity > 0 ? item.quantity - 1 : 0})}
+                    >
+                        -
+                    </button>
+
+                    {/* item quantity */}
+                    <p className="text-gray-600">{item.quantity}</p>
+
+                    {/* plus button */}
+                    <button 
+                        className="w-8 h-8 bg-green-500 text-white rounded-md flex justify-center items-center hover:bg-green-600"
+                        onClick={() => update({quantity : item.quantity + 1})}
+                    >
+                        +
+                    </button>
+                </div>
+            </div>
+            {isDrawerOpen && (
+                <div className="mt-4 p-2 bg-gray-200 rounded-md">
+                    <p className="text-gray-700">
+                        <span className="font-semibold">Expiration Date: </span>
+                        {item.expiration}
+                    </p>
+                </div>
+            )}
         </div>
-    )
+    );
 };
 
 export default FridgeCard;

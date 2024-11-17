@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { useDbData } from '../utilities/firebase';
-import GoogleMapComponent from '../components/GoogleMapComponent';
+import GoogleMapComponent from './GoogleMapComponent';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
