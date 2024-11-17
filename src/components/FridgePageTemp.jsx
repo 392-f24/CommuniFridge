@@ -7,6 +7,7 @@ const FridgePageTemp = () => {
     const { fridgeId } = useParams();
     const navigate = useNavigate();
     const [fridge, error] = useDbData(`/fridges/${fridgeId}`); 
+    const [isOpen, setIsOpen] = useState(false);
 
     if (error) return <h1>Error loading data: {error.toString()}</h1>;
     if (fridge === undefined) return <h1>Loading data...</h1>;
