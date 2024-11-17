@@ -8,11 +8,8 @@ const Dispatcher = () => {
     return (
     <BrowserRouter>
         <Routes>
-
             <Route path="/" element={<HomePage />}/>
-
-            <Route path="/fridge" element={<FridgePageTemp />}/>
-
+            <Route path="/fridge/:fridgeId" element={<FridgePageTemp />}/>
         </Routes>
     </BrowserRouter>);
 

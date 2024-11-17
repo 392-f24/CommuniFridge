@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDbUpdate } from "../utilities/firebase";
 
-const FridgeCard = ({ id, item }) => {
-    const [update, result] = useDbUpdate(`/items/${id}`);
+const FridgeCard = ({ fridgeId, itemId, item }) => {
+    const [update, result] = useDbUpdate(`/fridges/${fridgeId}/items/${itemId}`);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const toggleDrawer = () => {

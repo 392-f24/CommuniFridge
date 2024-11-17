@@ -14,14 +14,14 @@ const HomePage = () => {
         libraries: ['places'],
     });
 
-    const [listings, error] = useDbData('/locations');
+    const [fridges, error] = useDbData('/fridges');
 
     if (error) return <h1>Error loading data: {error.toString()}</h1>;
-    if (listings === undefined) return <h1>Loading data...</h1>;
-    if (!listings) return <h1>No listings found</h1>;
+    if (fridges === undefined) return <h1>Loading data...</h1>;
+    if (!fridges) return <h1>No fridges found</h1>;
 
-    const goToFridge = () => {
-        navigate('/fridge');
+    const goToFridge = (id) => {
+        navigate(`/fridge/${id}`);
     }
     
 
@@ -29,21 +29,23 @@ const HomePage = () => {
         <div className="overflow-y-hidden">
             {isLoaded ? (
                 <GoogleMapComponent 
-                    addresses={Object.entries(listings).map(([id, info]) => info.address)} 
+                    addresses={Object.entries(fridges).map(([id, fridge]) => fridge.address)} 
                     setMarker={setMarker} 
                 />
             ) : (
                 <div>Loading Google Maps...</div>
             )}
 
-
-            <div className="mt-4 flex justify-center">
-                <button
-                    onClick={goToFridge}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-                >
-                    View Fridge Content
-                </button>
+            
+            <div className="mt-4 flex flex-col space-y-4 items-center">
+                {Object.entries(fridges).map(([id, fridge]) => (
+                    <button
+                        onClick={() => goToFridge(id)}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+                    >
+                        View {fridge.name}: {fridge.address}
+                    </button>
+                ))}
             </div>
         </div>
 
