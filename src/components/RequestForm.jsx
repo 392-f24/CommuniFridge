@@ -2,13 +2,16 @@ import { useState, useRef } from 'react';
 import InputField from './InputField';
 import { useDbUpdate } from '../utilities/firebase';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 
-const RequestForm = ({ id }) => {
+const RequestForm = ({ fridgeId }) => {
 
     const uuid = useRef(uuidv4());
 
-    const [update, result] = useDbUpdate(`/${id}/${uuid}`);
+    const nav =useNavigate();
+
+    const [update, result] = useDbUpdate(`/fridges/${fridgeId}/requests/${uuid.current}`);
 
     const [data, setData] = useState({
         item: "",
@@ -24,6 +27,7 @@ const RequestForm = ({ id }) => {
     const handleSubmit = (e) => {
         e.preventDefault(); 
         update(data); 
+        nav(-1);
     }
 
     return (
@@ -39,7 +43,8 @@ const RequestForm = ({ id }) => {
 
                <button className="mt-2 py-2 px-4 border-2 rounded-md self-end text-white
                                  border-blue-500 bg-blue-400 hover:border-blue-700 
-                                 hover:scale-105"> 
+                                 hover:scale-105"
+                        type="submit"> 
                     Submit 
                 </button>
                

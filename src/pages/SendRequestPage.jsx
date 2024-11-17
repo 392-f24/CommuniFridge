@@ -18,7 +18,7 @@ const SendRequestPage = () => {
             </header>
 
             <main>
-                <RequestForm/>
+                <RequestForm fridgeId={fridgeId}/>
             </main>
         </div>
     );
