@@ -30,9 +30,14 @@ const FridgePageTemp = () => {
                     Add Item
                 </button>
 
+                <button onClick={() => navigate(`/fridge/${fridgeId}/request`)}
+                        className="border-1 border-green-600 rounded-md bg-green-300 p-3 text-white hover:bg-green-400">
+                    Requested Items 
+                </button>
+
                 <button onClick={() => navigate(`/fridge/${fridgeId}/request/create`)}
                         className="border-1 border-blue-600 rounded-md bg-blue-300 p-3 text-white hover:bg-blue-400">
-                    Request Item
+                    Make a Request
                 </button>
 
             </div>
