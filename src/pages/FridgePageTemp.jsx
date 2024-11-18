@@ -26,8 +26,8 @@ const FridgePageTemp = () => {
             </div>
 
             <div className="mt-4 flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4 md:justify-center items-center">
-                <button onClick={() => setIsOpen(true)} className="border-2 border-purple-400 bg-purple-300 p-2 rounded-md w-24 text-white">
-                    Add Item
+                <button onClick={() => setIsOpen(true)} className="border-2 border-purple-400 bg-purple-300 p-2 rounded-md text-white">
+                    Add New Item
                 </button>
 
                 <button onClick={() => navigate(`/fridge/${fridgeId}/request`)}
