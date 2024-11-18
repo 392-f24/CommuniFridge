@@ -9,8 +9,15 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
         setIsDrawerOpen(!isDrawerOpen);
     };
 
+    const categoryMap = {
+        'Produce' : 'bg-green-300',
+        'Pre-Made Meal' : 'bg-orange-300',
+        'Frozen' : 'bg-blue-300',
+        'Beverage' : 'bg-pink-300',
+    };
+
     return (
-        <div className="w-full bg-gray-100 p-4 border border-gray-300 rounded-md">
+        <div className={`w-full ${categoryMap[item.category]} p-4 border border-gray-200 rounded-md`}>
             <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">
                     {/* expand drawer button */}
@@ -49,8 +56,8 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
             {isDrawerOpen && (
                 <div className="mt-4 p-2 bg-gray-200 rounded-md">
                     <p className="text-gray-700">
-                        <span className="font-semibold">Expiration Date: </span>
-                        {item.expiration}
+                        <span className="font-semibold">Category: </span>
+                        {item.category}
                     </p>
                 </div>
             )}
