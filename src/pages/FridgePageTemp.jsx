@@ -2,8 +2,9 @@ import { useDbData } from "../utilities/firebase";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
-import FridgeCard from "./FridgeCard";
-import AddModal from "./AddModal";
+import FridgeCard from "../components/FridgeCard";
+import AddModal from "../components/AddModal";
+import BackButton from '../components/BackButton'
 
 const FridgePageTemp = () => {
     const { fridgeId } = useParams();
@@ -15,27 +16,30 @@ const FridgePageTemp = () => {
     if (fridge === undefined) return <h1>Loading data...</h1>;
     if (!fridge.items) return <h1>No items found</h1>;
 
-    const goToHome = () => {
-        navigate('/');
-    }
 
     return (
         <div>
+            <BackButton />
             <div>
                 <h1 className="text-3xl font-semibold text-center text-blue-800 mb-6">{fridge.displayName} Fridge</h1>
                 {Object.entries(fridge.items).map(([itemId, item]) => <FridgeCard key={itemId} fridgeId={fridgeId} itemId={itemId} item={item}/>)}
             </div>
 
-            <div className="mt-4 flex flex-col space-y-4 items-center">
-                <button
-                    onClick={() => goToHome()}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition border-2 border-blue-700"
-                >
-                    Back to Map
-                </button>
+            <div className="mt-4 flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4 md:justify-center items-center">
                 <button onClick={() => setIsOpen(true)} className="border-2 border-purple-400 bg-purple-300 p-2 rounded-md text-white">
                     Add New Item
                 </button>
+
+                <button onClick={() => navigate(`/fridge/${fridgeId}/request`)}
+                        className="border-1 border-green-600 rounded-md bg-green-300 p-3 text-white hover:bg-green-400">
+                    Requested Items 
+                </button>
+
+                <button onClick={() => navigate(`/fridge/${fridgeId}/request/create`)}
+                        className="border-1 border-blue-600 rounded-md bg-blue-300 p-3 text-white hover:bg-blue-400">
+                    Make a Request
+                </button>
+
             </div>
             {isOpen && <AddModal isOpen={isOpen} setIsOpen={setIsOpen} fridge="1" />}
         </div>

@@ -16,6 +16,13 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
         setIsDrawerOpen(!isDrawerOpen);
     };
 
+    const categoryMap = {
+        'Produce' : 'bg-green-300',
+        'Pre-Made Meal' : 'bg-orange-300',
+        'Frozen' : 'bg-blue-300',
+        'Beverage' : 'bg-pink-300',
+    };
+
     return (
         <div className={`w-full ${categoryMap[item.category]} p-4 border border-gray-200 rounded-md`}>
             <div className="flex justify-between items-center">
