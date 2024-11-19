@@ -4,13 +4,16 @@ import { useDbData } from '../utilities/firebase';
 import GoogleMapComponent from '../components/GoogleMapComponent';
 import { useNavigate } from 'react-router-dom';
 
+// set as const variable here, otherwise Loadscript warning
+const places = ['places'];
+
 const HomePage = () => {
     const [marker, setMarker] = useState('');
     const navigate = useNavigate();
 
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: "AIzaSyBc0C9RTODyfkqvUKu-TTssvwLchVqR6FU",
-        libraries: ['places'],
+        libraries: places,
     });
 
     const [fridges, error] = useDbData('/fridges');
