@@ -12,14 +12,14 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
     };
 
     const categoryMap = {
-        'Produce' : 'bg-green-300',
-        'Pre-Made Meal' : 'bg-orange-300',
-        'Frozen' : 'bg-blue-300',
-        'Beverage' : 'bg-pink-300',
+        'Produce' : 'bg-produce',
+        'Pre-Made Meal' : 'bg-preMadeMeal',
+        'Frozen' : 'bg-frozen',
+        'Beverage' : 'bg-beverage',
     };
 
     return (
-        <div className={`w-full ${categoryMap[item.category]} p-4 border border-gray-200 rounded-md`}>
+        <div className={`w-full ${categoryMap[item.category]} p-4 border border-white rounded-md`}>
             <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">
                     <DrawerButton isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
@@ -49,14 +49,16 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
                     </button>
                 </div>
             </div>
-            {isDrawerOpen && (
-                <div className="mt-4 p-2 bg-gray-200 rounded-md">
-                    <p className="text-gray-700">
+            <div className={`overflow-hidden transition-all duration-300 
+                ${isDrawerOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
+            >
+                <div className="mt-4 p-2 bg-white rounded-md border border-2 border-black">
+                    <p>
                         <span className="font-semibold">Category: </span>
                         {item.category}
                     </p>
                 </div>
-            )}
+            </div>
         </div>
     );
 };
