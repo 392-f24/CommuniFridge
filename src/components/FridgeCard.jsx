@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useDbUpdate } from "../utilities/firebase";
+import DrawerButton from "./DrawerButton";
+import { IoAddCircle, IoRemoveCircle } from "react-icons/io5";
 
 const FridgeCard = ({ fridgeId, itemId, item }) => {
     const [update, result] = useDbUpdate(`/fridges/${fridgeId}/items/${itemId}`);
@@ -10,23 +12,17 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
     };
 
     const categoryMap = {
-        'Produce' : 'bg-green-300',
-        'Pre-Made Meal' : 'bg-orange-300',
-        'Frozen' : 'bg-blue-300',
-        'Beverage' : 'bg-pink-300',
+        'Produce' : 'bg-produce',
+        'Pre-Made Meal' : 'bg-preMadeMeal',
+        'Frozen' : 'bg-frozen',
+        'Beverage' : 'bg-beverage',
     };
 
     return (
-        <div className={`w-full ${categoryMap[item.category]} p-4 border border-gray-200 rounded-md`}>
+        <div className={`w-full ${categoryMap[item.category]} p-4 border border-white rounded-md`}>
             <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">
-                    {/* expand drawer button */}
-                    <button
-                        onClick={toggleDrawer}
-                        className="w-6 h-6 bg-blue-500 text-white rounded-full flex justify-center items-center hover:bg-blue-600"
-                    >
-                        ▼
-                    </button>
+                    <DrawerButton isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
 
                     {/* item name */}
                     <h1 className="text-lg font-semibold text-gray-800">{item.name}</h1>
@@ -34,33 +30,35 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
                 <div className="flex items-center space-x-2">
                     {/* minus button */}
                     <button 
-                        className="w-8 h-8 bg-red-500 text-white rounded-md flex justify-center items-center hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                        className="text-xl bg-white rounded-full disabled:opacity-25 disabled:cursor-not-allowed"
                         disabled={item.quantity === 0}
                         onClick={() => update({quantity : item.quantity > 0 ? item.quantity - 1 : 0})}
                     >
-                        -
+                        <IoRemoveCircle />
                     </button>
 
                     {/* item quantity */}
-                    <p className="text-gray-600">{item.quantity}</p>
+                    <p className="text-center w-10 bg-white rounded-md border border-2 border-black">{item.quantity}</p>
 
                     {/* plus button */}
                     <button 
-                        className="w-8 h-8 bg-green-500 text-white rounded-md flex justify-center items-center hover:bg-green-600"
+                        className="text-xl bg-white rounded-full"
                         onClick={() => update({quantity : item.quantity + 1})}
                     >
-                        +
+                        <IoAddCircle />
                     </button>
                 </div>
             </div>
-            {isDrawerOpen && (
-                <div className="mt-4 p-2 bg-gray-200 rounded-md">
-                    <p className="text-gray-700">
+            <div className={`overflow-hidden transition-all duration-300 
+                ${isDrawerOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
+            >
+                <div className="mt-4 p-2 bg-white rounded-md border border-2 border-black">
+                    <p>
                         <span className="font-semibold">Category: </span>
                         {item.category}
                     </p>
                 </div>
-            )}
+            </div>
         </div>
     );
 };
