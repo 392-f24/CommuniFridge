@@ -1,8 +1,11 @@
 import Dispatcher from './components/Dispatcher';
 
 function App() {
-
-  return (<Dispatcher/>);
+  return (
+    <div>
+      <Dispatcher/>
+    </div>
+  );
 }
 
 export default App;
