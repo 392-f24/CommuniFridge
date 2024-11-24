@@ -6,18 +6,13 @@ import { useNavigate } from 'react-router-dom';
 
 
 const RequestForm = ({ fridgeId }) => {
-
     const uuid = useRef(uuidv4());
-
-    const nav =useNavigate();
-
+    const nav = useNavigate();
     const [update, result] = useDbUpdate(`/fridges/${fridgeId}/requests/${uuid.current}`);
-
     const [data, setData] = useState({
         item: "",
         quantity: ""
     })
-
 
     const handleChange = (e) => {
         const { value, name } = e.target;
@@ -37,17 +32,14 @@ const RequestForm = ({ fridgeId }) => {
                   onSubmit={(e) => {handleSubmit(e)}}>
 
                <InputField name="item" data={data.item} handleChange={handleChange}/>
-
                <InputField name="quantity" data={data.quantity} handleChange={handleChange}/>
-
 
                <button className="mt-2 py-2 px-4 border-2 rounded-md self-end text-white
                                  border-blue-500 bg-blue-400 hover:border-blue-700 
                                  hover:scale-105"
                         type="submit"> 
                     Submit 
-                </button>
-               
+                </button> 
             </form>
         </div>
     );
