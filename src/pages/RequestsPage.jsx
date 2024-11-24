@@ -15,7 +15,7 @@ const RequestsPage = () => {
 
     if (error) return <h1 className="text-red-500 text-2xl text-center">Error loading data: {error.toString()}</h1>;
     if (data === undefined) return <h1 className="text-purple-400 text-2xl text-center">Loading data...</h1>;
-    if (!data) return <h1 className="text-red-500 text-2xl text-center">No data found</h1>;
+    if (!data) return (<div> <BackButton/> <h1 className="text-red-500 text-2xl text-center">No data found</h1> </div>);
     
     const requestEntries = Object.entries(data);
 
