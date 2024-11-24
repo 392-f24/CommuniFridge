@@ -11,7 +11,7 @@ const AddModal = ({ isOpen, setIsOpen, fridge }) => {
       }`}
     >
       <div
-        className="flex flex-col bg-white rounded-md relative w-[85%] h-[65%]"
+        className="flex flex-col bg-white rounded-md relative w-[85%] h-fit"
         onClick={(e) => e.stopPropagation()}
       >
         <h1 className="text-2xl text-center my-4 font-bold">

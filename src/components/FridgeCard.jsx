@@ -7,16 +7,17 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
     const [update, result] = useDbUpdate(`/fridges/${fridgeId}/items/${itemId}`);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+    const categoryMap = {
+        'Produce' : 'bg-green-300',
+        'Pre-Made Meal' : 'bg-orange-300',
+        'Frozen' : 'bg-blue-300',
+        'Beverage' : 'bg-pink-300',
+    }
+
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
     };
 
-    const categoryMap = {
-        'Produce' : 'bg-produce',
-        'Pre-Made Meal' : 'bg-preMadeMeal',
-        'Frozen' : 'bg-frozen',
-        'Beverage' : 'bg-beverage',
-    };
 
     return (
         <div className={`w-full ${categoryMap[item.category]} p-4 border border-white rounded-md`}>
