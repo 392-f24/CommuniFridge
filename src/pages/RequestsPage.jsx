@@ -73,12 +73,29 @@ const RequestsPage = () => {
             </header>
 
             <div className="flex flex-col space-y-2 mt-6">
+            <header className="flex flex-col items-center text-center md:mt-2">
+                <h1 className="font-bold text-2xl mb-2"> Items Requests </h1>
+                
+                {/* Search Bar */}
+                <div className="w-full max-w-md mt-4">
+                    <input
+                        type="text"
+                        placeholder="Search items..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+            </header>
+
+            <div className="flex flex-col space-y-2 mt-4">
                 {requests.length > 0 ? (
                     requests
                 ) : (
                     <p className="text-gray-500 text-center">No matching items found.</p>
                 )}
             </div>
+
         </div>
     );
 }
