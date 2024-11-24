@@ -12,7 +12,7 @@ const HomePage = () => {
     const navigate = useNavigate();
 
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: "AIzaSyBc0C9RTODyfkqvUKu-TTssvwLchVqR6FU",
+        googleMapsApiKey: import.meta.env.VITE_API_KEY,
         libraries: places,
     });
 

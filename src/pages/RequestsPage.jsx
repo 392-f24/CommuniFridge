@@ -4,6 +4,7 @@ import BackButton from '../components/BackButton';
 import RequestCard from '../components/RequestCard';
 import { useState } from 'react'; 
 
+
 const RequestsPage = () => {
     const { fridgeId } = useParams();
 
@@ -22,6 +23,7 @@ const RequestsPage = () => {
     );
 
     const requests = filteredRequests.map(([id, request]) => (
+    const requests = Object.entries(data).map(([id, request]) => (
         <RequestCard key={id} quantity={request.quantity} item={request.item} />
     ));
 
@@ -50,6 +52,7 @@ const RequestsPage = () => {
                     <p className="text-gray-500 text-center">No matching items found.</p>
                 )}
             </div>
+
         </div>
     );
 }
