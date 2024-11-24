@@ -92,7 +92,6 @@ const RequestForm = ({ fridgeId }) => {
 
     return (
         <div className="mt-2">
-
             <form 
                 className="flex flex-col mx-auto items-center w-3/4"
                 onSubmit={handleSubmit}
@@ -120,7 +119,6 @@ const RequestForm = ({ fridgeId }) => {
                > 
                     Submit 
                 </button>
-
             </form>
         </div>
     );
