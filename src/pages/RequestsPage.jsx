@@ -3,7 +3,6 @@ import { useDbData } from "../utilities/firebase";
 import BackButton from '../components/BackButton';
 import RequestCard from '../components/RequestCard';
 
-
 const RequestsPage = () => {
     const { fridgeId } = useParams();
 
@@ -13,7 +12,9 @@ const RequestsPage = () => {
     if (data === undefined) return <h1 className="text-purple-400 text-2xl text-center">Loading data...</h1>;
     if (!data) return <h1 className="text-red-500 text-2xl text-center">No data found</h1>;
     
-    const requests = Object.values(data).map((request, i) => <RequestCard key={i} quantity={request.quantity} item={request.item} />);
+    const requests = Object.entries(data).map(([id, request]) => (
+        <RequestCard key={id} quantity={request.quantity} item={request.item} />
+    ));
 
     return (
         <div>
@@ -26,10 +27,8 @@ const RequestsPage = () => {
                 {requests}
             </div>
             
-
         </div>
     );
 }
-
 
 export default RequestsPage;
