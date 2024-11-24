@@ -18,12 +18,6 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
         setIsDrawerOpen(!isDrawerOpen);
     };
 
-    const categoryMap = {
-        'Produce' : 'bg-produce',
-        'Pre-Made Meal' : 'bg-preMadeMeal',
-        'Frozen' : 'bg-frozen',
-        'Beverage' : 'bg-beverage',
-    };
 
     return (
         <div className={`w-full ${categoryMap[item.category]} p-4 border border-white rounded-md`}>
