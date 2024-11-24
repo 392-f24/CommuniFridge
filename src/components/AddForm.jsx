@@ -32,7 +32,7 @@ const AddForm = ({ setIsOpen, fridge }) => {
 
     update(newData);
     setIsOpen(false);
-    navigate('/'); // Redirect back to Fridge after submission
+    navigate(`/fridge/${fridgeId}`); // Redirect back to Fridge after submission
   };
 
   if (error) return <h1 className="text-red-500 text-2xl text-center">Error loading data: {error.toString()}</h1>;
