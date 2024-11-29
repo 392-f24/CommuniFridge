@@ -1,5 +1,4 @@
 const Dropdown = (props) => {
-
     return (
         <div className="flex flex-col px-2">
             <label className="self-start font-bold" htmlFor={props.name}>{props.label}</label>
@@ -16,22 +15,18 @@ const Dropdown = (props) => {
                 <option value="">
                     --Select an Option -- 
                 </option>
-                <option value="Produce">
-                    Produce 
-                </option>
-                <option value="Pre-Made Meal">
-                    Pre-Made Meal
-                </option>
-                <option value="Frozen">
-                    Frozen
-                </option>
-                <option value="Beverage">
-                    Beverage
-                </option>
+                {props.children ? props.children : (
+                    <>
+                        <option value="Produce">Produce</option>
+                        <option value="Pre-Made Meal">Pre-Made Meal</option>
+                        <option value="Frozen">Frozen</option>
+                        <option value="Beverage">Beverage</option>
+                    </>
+                )}
             </select>
             {props.error && <span className="text-red-500 text-sm mt-1">{props.error}</span>}
         </div>
     );
 };
 
-export default Dropdown; 
+export default Dropdown;
