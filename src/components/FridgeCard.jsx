@@ -4,7 +4,6 @@ import DrawerButton from "./DrawerButton";
 import DeleteButton from "./DeleteButton";
 import ConfirmationModal from "./ConfirmationModal";
 import { IoAddCircle, IoRemoveCircle } from "react-icons/io5";
-import { set } from "firebase/database";
 
 const FridgeCard = ({ fridgeId, itemId, item }) => {
     const [update, result] = useDbUpdate(`/fridges/${fridgeId}/items/${itemId}`);
@@ -51,7 +50,7 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
                     </button>
 
                     {/* item quantity */}
-                    <p className="text-center w-10 bg-white rounded-md border border-2 border-black">{item.quantity}</p>
+                    <p className="text-center w-10 bg-white rounded-md border-2 border-black">{item.quantity}</p>
 
                     {/* plus button */}
                     <button 
@@ -65,7 +64,7 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
             <div className={`overflow-hidden transition-all duration-300 
                 ${isDrawerOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
             >
-                <div className="mt-4 p-2 bg-white rounded-md border border-2 border-black">
+                <div className="mt-4 p-2 bg-white rounded-md border-2 border-black">
                     <p>
                         <span className="font-semibold">Category: </span>
                         {item.category}
