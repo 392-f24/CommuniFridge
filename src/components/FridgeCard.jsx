@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useDbUpdate } from "../utilities/firebase";
 import DrawerButton from "./DrawerButton";
+import DeleteButton from "./DeleteButton";
+import ConfirmationModal from "./ConfirmationModal";
 import { IoAddCircle, IoRemoveCircle } from "react-icons/io5";
+import { set } from "firebase/database";
 
 const FridgeCard = ({ fridgeId, itemId, item }) => {
     const [update, result] = useDbUpdate(`/fridges/${fridgeId}/items/${itemId}`);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isConfOpen, setIsConfOpen] = useState(false);
 
     const categoryMap = {
         'Produce' : 'bg-green-300',
@@ -17,6 +21,14 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
     };
+
+    const handleDelete = () => {
+        setIsConfOpen(true);
+    }
+
+    const handleConfirmation = () => {
+
+    }
 
 
     return (
@@ -59,7 +71,12 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
                         {item.category}
                     </p>
                 </div>
+
+                <DeleteButton handleDelete={handleDelete}/>
             </div>
+
+            {isConfOpen && <ConfirmationModal handleClose={() => setIsConfOpen(false)}
+                                               handleConfirmation = {handleConfirmation}/>}
         </div>
     );
 };
