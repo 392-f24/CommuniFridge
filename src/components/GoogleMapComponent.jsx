@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 
 const mapContainerStyle = {
   height: "16rem",
@@ -12,63 +12,92 @@ const defaultCenter = {
   lng: -87.6753
 };
 
-const GoogleMapComponent = ({ addresses, setMarker }) => {
+const GoogleMapComponent = ({ fridges }) => {
   const [locations, setLocations] = useState([]);
+  const [infoWindow, setInfoWindow] = useState(null); // Track InfoWindow state
   const mapRef = useRef(null);
 
   useEffect(() => {
     const geocodeAddresses = async () => {
       const geocoder = new window.google.maps.Geocoder();
-      const locationPromises = addresses.map((address) => {
-        return new Promise((resolve, reject) => {
-          geocoder.geocode({ address: address }, (results, status) => {
+      const locationPromises = Object.entries(fridges).map(([id, fridge]) => {
+        return new Promise((resolve) => {
+          geocoder.geocode({ address: fridge.address }, (results, status) => {
             if (status === "OK") {
               const coordinates = results[0].geometry.location;
-              resolve({ lat: coordinates.lat(), lng: coordinates.lng() });
+              resolve({
+                id,
+                location: { lat: coordinates.lat(), lng: coordinates.lng() },
+                fridge
+              });
             } else {
-              console.error("Geocode was not successful for the following reason: " + status);
-              resolve(null);  // Resolve as null to skip failed geocodes
+              console.error("Geocode failed for: " + fridge.address);
+              resolve(null);
             }
           });
         });
       });
 
       const resolvedLocations = await Promise.all(locationPromises);
-      const filteredLocations = resolvedLocations.map((location, index) => [location, addresses[index]])
-                                                 .filter(([location, address]) => location !== null);
+      const filteredLocations = resolvedLocations.filter((location) => location !== null);
       setLocations(filteredLocations);
 
-      // Adjust the map bounds based on marker locations
       if (filteredLocations.length > 0 && mapRef.current) {
         const bounds = new window.google.maps.LatLngBounds();
-        filteredLocations.forEach(([location, address]) => bounds.extend(location));
-        mapRef.current.fitBounds(bounds);  // Fit map to the bounds of all markers
+        filteredLocations.forEach(({ location }) => bounds.extend(location));
+        mapRef.current.fitBounds(bounds);
       }
     };
 
-    if (addresses && addresses.length > 0) {
-      geocodeAddresses();
-    }
-  }, [addresses]);
+    geocodeAddresses();
+  }, [fridges]);
 
+  const handleMarkerClick = (clickedMarker) => {
+    setInfoWindow(clickedMarker); // Open the InfoWindow for the selected marker
+    if (mapRef.current) {
+      mapRef.current.setCenter(clickedMarker.location);
+      mapRef.current.setZoom(15);
+    }
+  };
+
+  const handleMapClick = () => {
+    setInfoWindow(null); // Close InfoWindow when clicking on the map
+    if (mapRef.current) {
+      mapRef.current.setZoom(5);
+      mapRef.current.setCenter(defaultCenter);
+    }
+  };
 
   return (
     <div className="h-50px">
-        <GoogleMap
+      <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={defaultCenter}
         zoom={5}
         onLoad={(map) => (mapRef.current = map)}
-        onClick={() => setMarker('')}
+        onClick={handleMapClick}
       >
-        {locations.map(([location, address], index) => (
-          <Marker key={index}  
-                  position={location}
-                  onClick={() => setMarker(address)} />
+        {locations.map((marker) => (
+          <Marker
+            key={marker.id}
+            position={marker.location}
+            onClick={() => handleMarkerClick(marker)}
+          />
         ))}
+
+        {infoWindow && (
+          <InfoWindow
+            position={infoWindow.location}
+            onCloseClick={() => setInfoWindow(null)}
+          >
+            <div>
+              <h3>{infoWindow.fridge.displayName}</h3>
+              <p>{infoWindow.fridge.address}</p>
+            </div>
+          </InfoWindow>
+        )}
       </GoogleMap>
     </div>
-    
   );
 };
 

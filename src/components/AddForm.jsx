@@ -1,4 +1,4 @@
-import { useDbUpdate } from '../utilities/firebase';
+import { useDbData, useDbUpdate } from '../utilities/firebase';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -11,6 +11,7 @@ const AddForm = ({ setIsOpen, fridge }) => {
   const [itemId] = useState(uuidv4());
 
   const [update, result] = useDbUpdate(`/fridges/${fridge}/items/${itemId}`);
+  const [items, error] = useDbData(`/fridges/${fridge}/items`);
 
   const [formState, handleFormChange, setFormState] = useFormData(null, {
     name : '',
@@ -31,23 +32,31 @@ const AddForm = ({ setIsOpen, fridge }) => {
 
     update(newData);
     setIsOpen(false);
-    navigate('/'); // Redirect back to Fridge after submission
+    navigate(`/fridge/${fridgeId}`); // Redirect back to Fridge after submission
   };
+
+  if (error) return <h1 className="text-red-500 text-2xl text-center">Error loading data: {error.toString()}</h1>;
+  if (items === undefined) return <h1 className="text-purple-400 text-2xl text-center">Loading data...</h1>;
 
   return (
     <form
       className="flex flex-col gap-4 h-[70%] overflow-y-hidden"
       onSubmit={handleSubmit}
     >
-      <InputField
-        type="text"
-        data={formState.data.name}
-        name="name"
-        handleChange={handleFormChange}
-        label="Item Name"
-        error={formState.errors.name}
-      />
-
+      <div>
+        <InputField
+          type="text"
+          data={formState.data.name}
+          name="name"
+          handleChange={handleFormChange}
+          label="Item Name"
+          error={formState.errors.name}
+        />
+        <ul className={`px-5 py-0 my-0 divide-y-2 ${/(^\w)/.test(formState.data.name) ? "" : "hidden"}`}>
+          {Object.values(items).filter((item) => (item.name).includes(formState.data.name))
+                  .map((item) => <li key={item.name}>{item.name}</li>)}
+        </ul>
+      </div>
       <InputField
         type="number"
         data={formState.data.quantity}
