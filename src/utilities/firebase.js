@@ -1,10 +1,7 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { useCallback, useEffect, useState } from 'react';
 import { getDatabase, onValue, ref, update, remove} from 'firebase/database';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -38,7 +35,7 @@ export const useAuthState = () => {
       setLoading(false);
     })
     return () => unsubscribe();
-}, []);
+  }, []);
 
   return [user, loading];
 };
@@ -47,15 +44,18 @@ export const useDbData = (path) => {
   const [data, setData] = useState();
   const [error, setError] = useState(null);
 
-  useEffect(() => (
-    onValue(ref(database, path), (snapshot) => {
-     setData( snapshot.val() );
+  useEffect(() => {
+    const dbRef = ref(database, path);
+    const unsubscribe = onValue(dbRef, (snapshot) => {
+      setData(snapshot.val());
     }, (error) => {
       setError(error);
-    })
-  ), [ path ]);
+    });
 
-  return [ data, error ];
+    return () => unsubscribe();
+  }, [path]);
+
+  return [data, error];
 };
 
 const makeResult = (error) => {
@@ -66,15 +66,22 @@ const makeResult = (error) => {
 
 export const useDbUpdate = (path) => {
   const [result, setResult] = useState();
+
   const updateData = useCallback((value) => {
-      update(ref(database, path), value)
-      .then(() => setResult(makeResult()))
-      .catch((error) => setResult(makeResult(error)))
-  }, [database, path]);
+    // Return the promise to allow awaiting in the calling function
+    return update(ref(database, path), value)
+      .then(() => {
+        setResult(makeResult());
+        return makeResult(); // Return result for further chaining if needed
+      })
+      .catch((error) => {
+        setResult(makeResult(error));
+        throw error; // Rethrow the error to be caught by the caller
+      });
+  }, [path, database]);
 
   return [updateData, result];
 };
-
 
 export const useDbRemove = (path) => {
   const [result, setResult] = useState();
@@ -86,3 +93,4 @@ export const useDbRemove = (path) => {
 
   return [removeData, result];
 };
+
