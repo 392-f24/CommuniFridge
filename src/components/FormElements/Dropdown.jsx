@@ -19,14 +19,26 @@ const Dropdown = (props) => {
                 <option value="Produce">
                     Produce 
                 </option>
-                <option value="Pre-Made Meal">
-                    Pre-Made Meal
+                <option value="Grains">
+                    Grains 
+                </option>
+                <option value="Dairy">
+                    Dairy
+                </option>
+                <option value="Snacks">
+                    Snacks 
+                </option>
+                <option value="Beverage">
+                    Beverage
+                </option>
+                <option value="Canned">
+                    Canned
                 </option>
                 <option value="Frozen">
                     Frozen
                 </option>
-                <option value="Beverage">
-                    Beverage
+                <option value="Premade">
+                    Premade
                 </option>
             </select>
             {props.error && <span className="text-red-500 text-sm mt-1">{props.error}</span>}
