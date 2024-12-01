@@ -17,10 +17,30 @@ const Dropdown = (props) => {
                 </option>
                 {props.children ? props.children : (
                     <>
-                        <option value="Produce">Produce</option>
-                        <option value="Pre-Made Meal">Pre-Made Meal</option>
-                        <option value="Frozen">Frozen</option>
-                        <option value="Beverage">Beverage</option>
+                        <option value="Produce">
+                            Produce 
+                        </option>
+                        <option value="Grains">
+                            Grains 
+                        </option>
+                        <option value="Dairy">
+                            Dairy
+                        </option>
+                        <option value="Snacks">
+                            Snacks 
+                        </option>
+                        <option value="Beverage">
+                            Beverage
+                        </option>
+                        <option value="Canned">
+                            Canned
+                        </option>
+                        <option value="Frozen">
+                            Frozen
+                        </option>
+                        <option value="Premade">
+                            Premade
+                        </option>
                     </>
                 )}
             </select>
