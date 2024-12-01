@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { useCallback, useEffect, useState } from 'react';
-import { getDatabase, onValue, ref, update} from 'firebase/database';
+import { getDatabase, onValue, ref, update, remove} from 'firebase/database';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -73,4 +73,16 @@ export const useDbUpdate = (path) => {
   }, [database, path]);
 
   return [updateData, result];
+};
+
+
+export const useDbRemove = (path) => {
+  const [result, setResult] = useState();
+  const removeData = useCallback(() => {
+      remove(ref(database, path))
+      .then(() => setResult(makeResult()))
+      .catch((error) => setResult(makeResult(error)))
+  }, [database, path]);
+
+  return [removeData, result];
 };

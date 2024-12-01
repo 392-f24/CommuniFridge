@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDbUpdate } from "../utilities/firebase";
+import { useDbUpdate, useDbRemove } from "../utilities/firebase";
 import DrawerButton from "./DrawerButton";
 import DeleteButton from "./DeleteButton";
 import ConfirmationModal from "./ConfirmationModal";
@@ -7,6 +7,7 @@ import { IoAddCircle, IoRemoveCircle } from "react-icons/io5";
 
 const FridgeCard = ({ fridgeId, itemId, item }) => {
     const [update, result] = useDbUpdate(`/fridges/${fridgeId}/items/${itemId}`);
+    const [remove, res] = useDbRemove(`/fridges/${fridgeId}/items/${itemId}`);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isConfOpen, setIsConfOpen] = useState(false);
 
@@ -26,7 +27,8 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
     }
 
     const handleConfirmation = () => {
-
+        remove();
+        setIsConfOpen(false);
     }
 
 

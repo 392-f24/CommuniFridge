@@ -18,7 +18,7 @@ const ConfirmationModal = ( {handleClose, handleConfirmation }) => {
                             Cancel
                         </button>
                         <button className="bg-green-500 hover:bg-green-600 rounded-md border-1 border-green-700 p-3 text-white"
-                            onClick={handleClose}> 
+                            onClick={handleConfirmation}> 
                             Confirm
                         </button>
                     </div>
