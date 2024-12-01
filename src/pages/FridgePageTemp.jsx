@@ -20,7 +20,7 @@ const FridgePageTemp = () => {
     return (
         <div>
             <BackButton />
-            <div>
+            <div className="flex flex-col items-center">
                 <h1 className="text-3xl font-semibold text-center text-blue-800 mb-6">{fridge.displayName} Fridge</h1>
                 {Object.entries(fridge.items).map(([itemId, item]) => <FridgeCard key={itemId} fridgeId={fridgeId} itemId={itemId} item={item}/>)}
             </div>
