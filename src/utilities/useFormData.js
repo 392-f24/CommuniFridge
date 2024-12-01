@@ -18,6 +18,8 @@ export const useFormData = (validator = null, initialData = {}) => {
         // Remove the value from the array
         newValue = (state.data[name] || []).filter(item => item !== value);
       }
+    } else if (type === 'number') {
+      newValue = parseInt(value, 10);
     } else {
       newValue = value;
     }

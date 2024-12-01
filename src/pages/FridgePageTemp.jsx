@@ -13,7 +13,7 @@ const FridgePageTemp = () => {
     const { fridgeId } = useParams();
     const navigate = useNavigate();
     const [fridge, error] = useDbData(`/fridges/${fridgeId}`); 
-    const [update] = useDbUpdate(`/fridges/${fridgeId}`);
+    const [update, result] = useDbUpdate(`/fridges/${fridgeId}`);
     const [isAddOpen, setIsAddOpen] = useState(false);
     const [isFulfillOpen, setIsFulfillOpen] = useState(false);
     const [selectedCategories, setSelectedCategories] = useState([]); // Track selected categories
@@ -36,7 +36,6 @@ const FridgePageTemp = () => {
         // Toggle "Others" selection
         setIncludeOthers((prev) => !prev);
     };
-
     const filteredItems = Object.entries(fridge.items).filter(([_, item]) => {
         // Check if item matches selected categories or is in "Others"
         const isInCategory = selectedCategories.includes(item.category);
@@ -44,7 +43,6 @@ const FridgePageTemp = () => {
         // If neither "Others" nor any category is selected, show all items
         return (selectedCategories.length > 0 || includeOthers) ? isInCategory || isOther : true;
     });
-
     const handleVerification = () => {
         const now = new Date();
         const currentDate = now.toLocaleDateString();
@@ -109,7 +107,6 @@ const FridgePageTemp = () => {
                 >
                     Requested Items 
                 </button>
-
                 <button 
                     onClick={() => navigate(`/fridge/${fridgeId}/request/create`)}
                     className="border-1 border-blue-600 rounded-md bg-blue-300 p-3 text-white hover:bg-blue-400"
