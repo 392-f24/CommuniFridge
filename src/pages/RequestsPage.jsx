@@ -3,6 +3,7 @@ import { useDbData } from "../utilities/firebase";
 import BackButton from '../components/BackButton';
 import RequestCard from '../components/RequestCard';
 import { useState } from 'react'; 
+import FulfillModal from "../components/FulfillModal";
 
 const RequestsPage = () => {
     const { fridgeId } = useParams();
@@ -12,6 +13,8 @@ const RequestsPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     
     const [sortOption, setSortOption] = useState('mostRequested');
+
+    const [isFulfillOpen, setIsFulfillOpen] = useState(false);
 
     if (error) return <h1 className="text-red-500 text-2xl text-center">Error loading data: {error.toString()}</h1>;
     if (data === undefined) return <h1 className="text-purple-400 text-2xl text-center">Loading data...</h1>;
@@ -78,6 +81,17 @@ const RequestsPage = () => {
                 ) : (
                     <p className="text-gray-500 text-center">No matching items found.</p>
                 )}
+            </div>
+            
+            {/* New Fulfill Item button */}
+            {isFulfillOpen && <FulfillModal isOpen={isFulfillOpen} setIsOpen={setIsFulfillOpen} fridgeId={fridgeId} />}
+            <div className="flex flex-col p-10 md:space-y-0 md:flex-row md:space-x-4 md:justify-center items-center">
+                <button 
+                    onClick={() => setIsFulfillOpen(true)}
+                    className="border-2 border-yellow-500 rounded-md bg-yellow-400 p-2 text-white hover:bg-yellow-500"
+                >
+                    Fulfill Item
+                </button>
             </div>
         </div>
     );

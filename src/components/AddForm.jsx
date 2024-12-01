@@ -19,6 +19,14 @@ const AddForm = ({ setIsOpen, fridge }) => {
     category : ''
   });
 
+  const autoFill = ({item, setState}) => {
+    setState({
+      name : item.name,
+      quantity : item.quantity,
+      category : item.category
+    })
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -53,7 +61,7 @@ const AddForm = ({ setIsOpen, fridge }) => {
           error={formState.errors.name}
         />
         <ul className={`px-5 py-0 my-0 divide-y-2 ${/(^\w)/.test(formState.data.name) ? "" : "hidden"}`}>
-          {Object.values(items).filter((item) => (item.name).includes(formState.data.name))
+          {Object.values(items).filter((item) => (item.name.toLowerCase()).includes(formState.data.name.toLowerCase()))
                   .map((item) => <li key={item.name}>{item.name}</li>)}
         </ul>
       </div>
