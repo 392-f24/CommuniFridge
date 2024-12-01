@@ -37,7 +37,7 @@ const FridgePageTemp = () => {
             <div>
                 <h1 className="text-3xl font-semibold text-center text-blue-800 mb-2">{fridge.displayName} Fridge</h1>
                 <h3 className="text-lg text-center mb-6">{`Items Last Verified at ${fridge.verificationDate} ${fridge.verificationTime}`}</h3>
-                <div className="h-[400px] md:h-3/4 overflow-auto">
+                <div className="flex flex-col items-center h-[400px] md:h-3/4 overflow-auto">
                     {Object.entries(fridge.items).map(([itemId, item]) => <FridgeCard key={itemId} fridgeId={fridgeId} itemId={itemId} item={item}/>)}
                 </div>
             </div>
