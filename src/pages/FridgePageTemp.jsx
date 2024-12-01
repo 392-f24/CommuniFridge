@@ -7,7 +7,7 @@ import AddModal from "../components/AddModal";
 import FulfillModal from "../components/FulfillModal"; 
 import BackButton from '../components/BackButton';
 
-const CATEGORIES = ['Produce', 'Pre-Made Meal', 'Frozen', 'Beverage'];
+const CATEGORIES = ['Produce', 'Premade', 'Frozen', 'Beverage'];
 
 const FridgePageTemp = () => {
     const { fridgeId } = useParams();
