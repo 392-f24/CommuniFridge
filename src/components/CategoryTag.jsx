@@ -11,7 +11,7 @@ const CategoryTag = ({ category }) => {
     };
 
     return (
-        <span className={`mr-1 px-2 py-0.5 text-xs font-medium text-white ${categoryMap[category]} rounded-full min-w-[67px] text-center`}>
+        <span className={`mr-2 px-2 py-0.5 text-xs font-medium text-white ${categoryMap[category]} rounded-full min-w-[67px] text-center`}>
             {category}
         </span>
     );

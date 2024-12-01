@@ -4,26 +4,15 @@ import CategoryTag from "./CategoryTag";
 
 const FridgeCard = ({ fridgeId, itemId, item }) => {
     const [update, result] = useDbUpdate(`/fridges/${fridgeId}/items/${itemId}`);
-    
-    const categoryMap = {
-        'Produce' : 'bg-white',
-        'Grains' : 'bg-white',
-        'Dairy' : 'bg-white',
-        'Snacks' : 'bg-white',
-        'Beverage' : 'bg-white',  
-        'Canned' : 'bg-white', 
-        'Frozen' : 'bg-white',
-        'Premade' : 'bg-white',
-    };
 
     return (
-        <div className={`w-[95%] ${categoryMap[item.category]} p-2 mb-1 border border-gray-300 shadow-md rounded-lg`}>
+        <div className={`w-[95%] bg-white p-2 mb-1 border border-gray-300 shadow-md rounded-lg`}>
             <div className="flex justify-between items-center">
                 <div className="flex flex-col items-start">
                     {/* item name */}
                     <h1 className="text-lg font-semibold text-gray-800">{item.name}</h1>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-1">
                     {/* category tag */}
                     <CategoryTag category={item.category} />
                     {/* minus button */}
