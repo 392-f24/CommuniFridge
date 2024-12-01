@@ -61,6 +61,8 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
                     >
                         <IoAddCircle />
                     </button>
+
+                    <DeleteButton handleDelete={handleDelete}/>
                 </div>
             </div>
             <div className={`overflow-hidden transition-all duration-300 
@@ -72,8 +74,6 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
                         {item.category}
                     </p>
                 </div>
-
-                <DeleteButton handleDelete={handleDelete}/>
             </div>
 
             {isConfOpen && <ConfirmationModal handleClose={() => setIsConfOpen(false)}
