@@ -33,7 +33,7 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
     }
 
     return (
-        <div className={`w-[95%] bg-white p-2 mb-1 border border-gray-300 shadow-md rounded-lg`}>
+        <div className={`w-[95%] bg-yellow-100 p-2 mb-1 border border-gray-300 shadow-md rounded-lg`}>
             <div className="flex justify-between items-center">
                 <div className="flex flex-col items-start">
                     {/* item name */}

@@ -91,7 +91,7 @@ const RequestForm = ({ fridgeId }) => {
     }
 
     return (
-        <div className="mt-2">
+        <div className="mt-2 h-[100vh] bg-yellow-200">
             <form 
                 className="flex flex-col mx-auto items-center w-3/4"
                 onSubmit={handleSubmit}
@@ -112,9 +112,9 @@ const RequestForm = ({ fridgeId }) => {
                />
 
                <button 
-                   className="mt-2 py-2 px-4 border-2 rounded-md self-end text-white
-                             border-blue-500 bg-blue-400 hover:border-blue-700 
-                             hover:scale-105"
+                   className="mt-2 py-2 px-4 border-2 rounded-md self-end
+                             border-blue-800 bg-blue-500 hover:border-blue-700 
+                             hover:scale-105 font-semibold shadow-md"
                    type="submit"
                > 
                     Submit 

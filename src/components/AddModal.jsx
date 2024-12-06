@@ -22,7 +22,7 @@ const AddModal = ({ isOpen, setIsOpen, fridge }) => {
 
         
         <button
-          className="bg-red-500 hover:bg-red-600 rounded-md border-1 border-red-700 p-3 m-1 text-white"
+          className="bg-red-500 hover:bg-red-600 rounded-md border-2 border-red-700 p-3 m-1 font-bold shadow-md"
           onClick={handleClick}
         >
           Cancel

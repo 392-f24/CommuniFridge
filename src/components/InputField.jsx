@@ -1,7 +1,7 @@
 const InputField = (props) => {
 
     return (
-    <div className="flex flex-col relative items-center w-full mb-4">
+    <div className="flex flex-col relative items-center w-full mb-4 shadow-md">
         <input id={props.name}
             type="text"
             name={props.name}

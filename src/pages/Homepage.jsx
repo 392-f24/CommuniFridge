@@ -24,21 +24,21 @@ const HomePage = () => {
   };
 
   return (
-    <div className="overflow-y-hidden">
+    <div className="overflow-y-hidden bg-yellow-200">
       {isLoaded ? (
         <GoogleMapComponent fridges={fridges} />
       ) : (
         <div>Loading Google Maps...</div>
       )}
 
-      <div className="mt-4 flex flex-col space-y-4 items-center">
+      <div className="display-block items-center">
         {Object.entries(fridges).map(([id, fridge]) => (
           <button
             key={id}
             onClick={() => goToFridge(id)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            className="bg-yellow-300 text-xl font-bold py-5 w-[50%] h-[25vh] hover:bg-yellow-300 transition border-2 border-yellow-400"
           >
-            View {fridge.displayName} Fridge
+            <span className="shadow-md shadow-yellow-400">{fridge.displayName} Fridge</span>
           </button>
         ))}
       </div>
