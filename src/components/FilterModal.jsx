@@ -1,7 +1,7 @@
 const FilterModal = ({CATEGORIES, toggleCategory, selectedCategories, toggleOthers, includeOthers}) => {
     
     
-    return (<div className="py-5 absolute flex flex-wrap justify-center space-x-2 bg-yellow-400 shadow-lg object-center w-[min]">
+    return (<div className="z-50 py-5 absolute flex flex-wrap justify-center space-x-2 bg-yellow-400 shadow-lg object-center w-[min]">
                 {CATEGORIES.map((category) => (
                     <button
                         key={category}
