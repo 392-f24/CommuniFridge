@@ -4,7 +4,7 @@ const InputField = (props) => {
     const { type, data, name, handleChange, label, error } = props;
 
     return (
-        <div className="flex flex-col items-start px-2">
+        <div className="flex flex-col items-start px-2 shadow-md">
             <label className="font-bold mb-1" htmlFor={name}> {label}</label>
             <input 
                 type={type} 

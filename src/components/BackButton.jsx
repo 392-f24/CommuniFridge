@@ -11,7 +11,7 @@ const BackButton = () => {
     }
 
     return (
-        <button className="absolute top-1 left-1 md:top-2 md:left-2"
+        <button className="absolute top-3 left-2"
                 onClick={handleClick}>
             <IoChevronBackCircle style={{ fontSize: '25px' }} />
         </button>

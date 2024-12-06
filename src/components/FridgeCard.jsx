@@ -54,8 +54,7 @@ const FridgeCard = ({ fridgeId, itemId, item }) => {
     };
 
     return (
-        <div className="relative w-[95%] bg-white p-2 mb-1 border border-gray-300 shadow-md rounded-lg overflow-hidden">
-            {/* Main Content */}
+        <div className={`w-[95%] bg-yellow-100 p-2 mb-1 border border-gray-300 shadow-md rounded-lg`}>
             <div
                 className={`flex justify-between items-center transition-transform duration-300 select-none`}
                 style={{

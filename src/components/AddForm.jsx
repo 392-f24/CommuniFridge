@@ -85,7 +85,7 @@ const AddForm = ({ setIsOpen, fridge }) => {
       <div className="flex justify-between px-1 py-2 mt-auto">
 
         <button
-          className="bg-green-500 hover:bg-green-600 rounded-md border-1 border-green-700 w-[100%] p-3 text-white"
+          className="bg-green-500 hover:bg-green-600 rounded-md border-2 border-green-700 w-[100%] p-3 shadow-md font-bold"
           type="submit"
         >
           Submit

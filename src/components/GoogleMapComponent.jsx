@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 
 const mapContainerStyle = {
-  height: "16rem",
+  height: "50vh",
   width: "100%"
 };
 
@@ -69,7 +69,7 @@ const GoogleMapComponent = ({ fridges }) => {
   };
 
   return (
-    <div className="h-50px">
+    <div className="h-[50vh]">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={defaultCenter}
